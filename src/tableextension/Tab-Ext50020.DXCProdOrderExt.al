@@ -1,4 +1,4 @@
-tableextension 50019 "DXCProdOrderExt" extends "Production Order" //MyTargetTableId
+tableextension 50020 "DXCProdOrderExt" extends "Production Order" //MyTargetTableId
 {
     fields
     {
