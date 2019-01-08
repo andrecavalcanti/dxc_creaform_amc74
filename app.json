@@ -1,0 +1,26 @@
+{
+  "id": "b6c13b00-e8f8-46c1-82f5-36b6e7555cb1",
+  "name": "DXC_PROJECT_AMC74",
+  "publisher": "DXC",
+  "brief": "",
+  "description": "",
+  "version": "1.0.0.0",
+  "compatibilityId": "1.0.0.0",
+  "privacyStatement": "",
+  "EULA": "",
+  "help": "",
+  "url": "",
+  "logo": "",
+  "capabilities": [],
+  "dependencies": [],
+  "screenshots": [],
+  "platform": "11.0.0.0",
+  "application": "11.0.0.0",
+  "idRange": {
+    "from": 50000,
+    "to": 50149
+  },
+  "showMyCode": true,
+  "breakonerror" : true,
+  "runtime": "1.0"
+}
