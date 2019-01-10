@@ -1,16 +1,18 @@
 page 50001 "DXCAddConsumptoProdOrder"
 {
-    PageType = List;
+    PageType = Card;
     SourceTable = "DXCAddConsumptoProdOrder";   
 
     CaptionML = ENU='DXC Add Consumption to Prod. Order',             
                 ENC='DXC Add Consumption to Prod. Order';
 
+    
+
     layout
     {
         area(content)
         {
-            repeater(Group)
+            group(General)
             {
                 field("Released Prod Order No.";"Released Prod Order No.")
                 {
