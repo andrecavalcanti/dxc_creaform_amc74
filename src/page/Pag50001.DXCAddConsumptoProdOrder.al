@@ -6,7 +6,7 @@ page 50001 "DXCAddConsumptoProdOrder"
     CaptionML = ENU='DXC Add Consumption to Prod. Order',             
                 ENC='DXC Add Consumption to Prod. Order';
 
-    
+    Editable = true;
 
     layout
     {
