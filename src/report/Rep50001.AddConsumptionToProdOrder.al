@@ -1,8 +1,8 @@
 report 50001 "AddConsumptionToProdOrder"
 {
     ProcessingOnly = true;
-    CaptionML = ENU='DXC Add Consumption to Prod. Order',             
-                ENC='DXC Add Consumption to Prod. Order';
+    CaptionML = ENU='Add Consumption to Prod. Order',             
+                ENC='Add Consumption to Prod. Order';
 
 
     dataset
@@ -102,7 +102,7 @@ report 50001 "AddConsumptionToProdOrder"
         ItemNo : Code[20];
         Quantity : Decimal;
         TakeBin : Code[20];
-        test : Codeunit Test;
+        //test : Codeunit Test;
         ProdOrder : Record "Production Order";
         Bin : Record Bin;
         BinList : Page "Bin List";

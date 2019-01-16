@@ -36,6 +36,8 @@ tableextension 50020 "DXCProdOrderExt" extends "Production Order" //MyTargetTabl
         if "Completely Picked" then
           ERROR(Text008);
 
+        HideValidationDialog := true;
+
         ProdOrderCompLine.RESET;
         ProdOrderCompLine.SETRANGE(Status,Status);
         ProdOrderCompLine.SETRANGE("Prod. Order No.","No.");

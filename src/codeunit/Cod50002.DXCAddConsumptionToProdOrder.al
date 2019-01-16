@@ -194,7 +194,8 @@ codeunit 50002 "DXCAddConsumptionToProdOrder"
         CalcConsumption.SETTABLEVIEW(PProdOrderComp);
         CalcConsumption.USEREQUESTPAGE := false;
         CalcConsumption.InitializeRequest(WORKDATE,1);
-        CalcConsumption.RUNMODAL;
+        //CalcConsumption.RUNMODAL;
+        CalcConsumption.RUN;
     end;
 
     local procedure PostConsumptionJnl();
