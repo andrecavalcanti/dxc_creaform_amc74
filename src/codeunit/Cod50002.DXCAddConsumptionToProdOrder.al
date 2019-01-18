@@ -86,7 +86,7 @@ codeunit 50002 "DXCAddConsumptionToProdOrder"
         //    ProdOrderComp.VALIDATE("Unit of Measure Code",ProdBOMLine[Level]."Unit of Measure Code");
         //    ProdOrderComp."Quantity per" := ProdBOMLine[Level]."Quantity per" * LineQtyPerUOM / ItemQtyPerUOM;
         //    ProdOrderComp."Quantity per" := Quantity;
-            ProdOrderComp.VALIDATE("Quantity per",Quantity);
+            ProdOrderComp.VALIDATE("Quantity per",1);
             ProdOrderComp.VALIDATE("Expected Quantity",Quantity);
         //    ProdOrderComp.Length := ProdBOMLine[Level].Length;
         //    ProdOrderComp.Width := ProdBOMLine[Level].Width;
