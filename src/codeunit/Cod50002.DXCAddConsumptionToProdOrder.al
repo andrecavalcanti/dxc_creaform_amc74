@@ -45,11 +45,11 @@ codeunit 50002 "DXCAddConsumptionToProdOrder"
     begin
 
 
-          ProdOrderComp.SETCURRENTKEY(Status,"Prod. Order No.","Prod. Order Line No.","Item No.");
+          /* ProdOrderComp.SETCURRENTKEY(Status,"Prod. Order No.","Prod. Order Line No.","Item No.");
           ProdOrderComp.SETRANGE(Status,PProdOrderLine.Status);
           ProdOrderComp.SETRANGE("Prod. Order No.",PProdOrderLine."Prod. Order No.");
           ProdOrderComp.SETRANGE("Prod. Order Line No.",PProdOrderLine."Line No.");
-          ProdOrderComp.SETRANGE("Item No.", ItemNo);
+          ProdOrderComp.SETRANGE("Item No.", ItemNo); */
         //  ProdOrderComp.SETRANGE("Variant Code",ProdBOMLine[Level]."Variant Code")P
         //  ProdOrderComp.SETRANGE("Routing Link Code",ProdBOMLine[Level]."Routing Link Code");
         //  ProdOrderComp.SETRANGE(Position,ProdBOMLine[Level].Position);
@@ -61,7 +61,7 @@ codeunit 50002 "DXCAddConsumptionToProdOrder"
         //  ProdOrderComp.SETRANGE(Depth,ProdBOMLine[Level].Depth);
         //  ProdOrderComp.SETRANGE("Unit of Measure Code",ProdBOMLine[Level]."Unit of Measure Code");
         //  ProdOrderComp.SETRANGE("Text Set ID",ProdBOMLine[Level]."Text Set ID");  // #TMW17.10.01:T100
-          if not ProdOrderComp.FINDFIRST then begin
+        //  if not ProdOrderComp.FINDFIRST then begin
             ProdOrderComp.RESET;
             ProdOrderComp.SETRANGE(Status,PProdOrderLine.Status);
             ProdOrderComp.SETRANGE("Prod. Order No.",PProdOrderLine."Prod. Order No.");
@@ -124,7 +124,7 @@ codeunit 50002 "DXCAddConsumptionToProdOrder"
             exit(true);
 
 
-          end else begin
+         // end else begin
         //    ProdOrderComp.SetIgnoreErrors;
         //    ProdOrderComp.SETCURRENTKEY(Status,"Prod. Order No."); // Reset key
         //    ProdOrderComp.BlockDynamicTracking(Blocked);
@@ -135,8 +135,8 @@ codeunit 50002 "DXCAddConsumptionToProdOrder"
         //    ProdOrderComp.MODIFY;
             //CalcConsumptiononConsumpJnl(LclProdOrder,ProdOrderComp);
             //ERROR(Text001,ProdOrderComp."Item No.");
-            PProdOrderComp := ProdOrderComp;
-          end;
+            //PProdOrderComp := ProdOrderComp;
+          //end;
         //  IF ProdOrderComp.HasErrorOccured THEN
         //    ErrorOccured := TRUE;
         //  ProdOrderComp.AutoReserve;
