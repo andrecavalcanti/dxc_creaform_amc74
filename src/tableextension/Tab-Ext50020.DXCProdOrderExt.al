@@ -10,7 +10,7 @@ tableextension 50020 "DXCProdOrderExt" extends "Production Order" //MyTargetTabl
         HideValidationDialog : Boolean;
     
     [Scope('Personalization')]
-    procedure CreatePickDXC(AssignedUserID : Code[50];SortingMethod : Option;SetBreakBulkFilter : Boolean;DoNotFillQtyToHandle : Boolean;PrintDocument : Boolean;PItemNo : Code[20]);
+    procedure CreatePickDXC(AssignedUserID : Code[50];SortingMethod : Option;SetBreakBulkFilter : Boolean;DoNotFillQtyToHandle : Boolean;PrintDocument : Boolean;PItemNo : Code[20];PProdOrderComp : Record "Prod. Order Component");
     var
         ProdOrderCompLine : Record "Prod. Order Component";
         WhseWkshLine : Record "Whse. Worksheet Line";
@@ -21,6 +21,7 @@ tableextension 50020 "DXCProdOrderExt" extends "Production Order" //MyTargetTabl
         ProdOrderCompLine.SETRANGE(Status,Status);
         ProdOrderCompLine.SETRANGE("Prod. Order No.","No.");
         ProdOrderCompLine.SETRANGE("Item No.",PItemNo);
+        ProdOrderCompLine.SETRANGE("Line No.", PProdOrderComp."Line No.");
         if ProdOrderCompLine.FIND('-') then
           repeat
             ItemTrackingMgt.InitItemTrkgForTempWkshLine(
@@ -42,6 +43,7 @@ tableextension 50020 "DXCProdOrderExt" extends "Production Order" //MyTargetTabl
         ProdOrderCompLine.SETRANGE(Status,Status);
         ProdOrderCompLine.SETRANGE("Prod. Order No.","No.");
         ProdOrderCompLine.SETRANGE("Item No.",PItemNo);
+        ProdOrderCompLine.SETRANGE("Line No.",PProdOrderComp."Line No.");
         ProdOrderCompLine.SETFILTER(
           "Flushing Method",'%1|%2|%3',
           ProdOrderCompLine."Flushing Method"::Manual,
@@ -51,6 +53,7 @@ tableextension 50020 "DXCProdOrderExt" extends "Production Order" //MyTargetTabl
         ProdOrderCompLine.SETFILTER("Expected Quantity",'>0');
         if ProdOrderCompLine.FIND('-') then begin
           CreatePickFromWhseSource.SetProdOrder(Rec);
+          CreatePickFromWhseSource.SetProdOrderComp(PProdOrderComp);
           CreatePickFromWhseSource.SetHideValidationDialog(HideValidationDialog);
           if HideValidationDialog then
             CreatePickFromWhseSource.Initialize(AssignedUserID,SortingMethod,PrintDocument,DoNotFillQtyToHandle,SetBreakBulkFilter);

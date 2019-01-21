@@ -27,7 +27,7 @@ codeunit 50002 "DXCAddConsumptionToProdOrder"
         ProdOrderLine.SETRANGE("Prod. Order No.",PProdOrderNo);
         if ProdOrderLine.FINDFIRST then begin
           CreateProdOrderComponent(ProdOrderLine,ProdOrderComp);
-          CreateNewPick(ProdOrder);
+          CreateNewPick(ProdOrder, ProdOrderComp);
           UpdateTakeBin(ProdOrderLine);
           CalcConsumptiononConsumpJnl(ProdOrder,ProdOrderComp);
           PostConsumptionJnl;
@@ -142,11 +142,11 @@ codeunit 50002 "DXCAddConsumptionToProdOrder"
         //  ProdOrderComp.AutoReserve;
     end;
 
-    local procedure CreateNewPick(PProdOrder : Record "Production Order");
+    local procedure CreateNewPick(PProdOrder : Record "Production Order"; PProdOrderComp : Record "Prod. Order Component");
     begin
 
         PProdOrder.SetHideValidationDialog(true);
-        PProdOrder.CreatePickDXC(USERID,0,false,false,false, ItemNo);
+        PProdOrder.CreatePickDXC(USERID,0,false,false,false, ItemNo, PProdOrderComp);
     end;
 
     local procedure UpdateTakeBin(PProdOrderLine : Record "Prod. Order Line");
