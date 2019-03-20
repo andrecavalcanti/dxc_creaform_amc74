@@ -3,11 +3,19 @@ codeunit 50002 "DXCAddConsumptionToProdOrder"
      var
         Text001 : Label '"Item %1 already exists on the component lines "';
         Text002 : Label 'Production Order Line not found';
+        // >> AMC-104
+        Text003 : Label 'Bin Type picked must all Picks';
+        Text004 : Label 'There is insufficient inventory in the bin to complete the transaction';
+        // << AMC-104
         ProdOrderComp : Record "Prod. Order Component";
         ItemNo :  Code[20];
         Quantity : Decimal;
         TakeBin : Code[20];
         ProdOrder : Record "Production Order";
+
+        // >> AMC-104
+        LocationCode : Code[20];
+        // << AMC-104
 
     
     procedure Post(PProdOrderNo : Code[20]; PItemNo : Code[20]; PQuantity : Decimal; PTakeBin : Code[20]);
@@ -22,6 +30,10 @@ codeunit 50002 "DXCAddConsumptionToProdOrder"
         TakeBin := PTakeBin;
 
         ProdOrder.GET(ProdOrder.Status::Released,PProdOrderNo);
+
+        // >> AMC-104
+        LocationCode := ProdOrder."Location Code";
+        // << AMC-104
 
         ProdOrderLine.SETRANGE(Status,ProdOrderLine.Status::Released);
         ProdOrderLine.SETRANGE("Prod. Order No.",PProdOrderNo);
@@ -226,4 +238,27 @@ codeunit 50002 "DXCAddConsumptionToProdOrder"
               WMSMgt.GetDefaultBin("Item No.","Variant Code","Location Code",BinCode);
           end;
     end;
+
+    // >> AMC-104
+    local procedure CheckBin();
+    var
+        Bin : Record Bin;
+        BinType : Record "Bin Type";
+        BinContent :Record "Bin Content";
+        Item :Record Item;
+    begin
+
+        Bin.Get(TakeBin);
+        BinType.GET(Bin."Bin Type Code");
+        if not BinType.Pick then
+            Error(Text003);
+
+        Item.GET(ItemNo);
+
+        BinContent.GET(TakeBin, ItemNo, LocationCode, Item."Base Unit of Measure",'');
+        if (BinContent.Quantity < Quantity) then
+            Error(Text004);
+
+    end;
+    // >> AMC-104
 }
