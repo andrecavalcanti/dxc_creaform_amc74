@@ -33,6 +33,7 @@ codeunit 50002 "DXCAddConsumptionToProdOrder"
 
         // >> AMC-104
         LocationCode := ProdOrder."Location Code";
+        CheckBin;
         // << AMC-104
 
         ProdOrderLine.SETRANGE(Status,ProdOrderLine.Status::Released);
@@ -248,14 +249,15 @@ codeunit 50002 "DXCAddConsumptionToProdOrder"
         Item :Record Item;
     begin
 
-        Bin.Get(TakeBin);
+        Bin.Get(LocationCode, TakeBin);
         BinType.GET(Bin."Bin Type Code");
         if not BinType.Pick then
             Error(Text003);
 
         Item.GET(ItemNo);
-
-        BinContent.GET(TakeBin, ItemNo, LocationCode, Item."Base Unit of Measure",'');
+        
+        BinContent.GET(LocationCode, TakeBin, ItemNo, '', Item."Base Unit of Measure");  
+        BinContent.CalcFields(Quantity);      
         if (BinContent.Quantity < Quantity) then
             Error(Text004);
 
